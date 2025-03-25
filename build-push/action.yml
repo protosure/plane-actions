@@ -11,19 +11,19 @@ inputs:
   private-registry-push:
     description: "Flag to push to private registry"
     required: false
-    default: "false"
+    default: "true"
   private-registry-username:
     description: "The private registry username"
-    default: ""
+    default: "${{ secrets.DOCKERHUB_USERNAME }}"
     required: false
   private-registry-token:
     description: "The private registry token"
-    default: ""
+    default: "${{ secrets.DOCKERHUB_TOKEN }}"
     required: false
   private-registry-addr:
     description: "The private registry addresss"
     required: false
-    default: "registry.plane.tools"
+    default: "${{ secrets.DOCKERHUB_REGISTRY }}"
   private-registry-project:
     description: "The private registry project"
     default: "plane"
@@ -133,11 +133,11 @@ runs:
         
         echo "DOCKER_TAGS=${TAG}" >> $GITHUB_ENV
         
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ inputs.dockerhub-username }}
-        password: ${{ inputs.dockerhub-token}}
+    # - name: Login to Docker Hub
+    #   uses: docker/login-action@v3
+    #   with:
+    #     username: ${{ inputs.dockerhub-username }}
+    #     password: ${{ inputs.dockerhub-token}}
 
     - name: Login to Private Registry
       if: ${{ inputs.private-registry-push == 'true' }}
