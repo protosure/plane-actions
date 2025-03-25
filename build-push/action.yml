@@ -11,19 +11,19 @@ inputs:
   private-registry-push:
     description: "Flag to push to private registry"
     required: false
-    default: "true"
+    default: "false"
   private-registry-username:
     description: "The private registry username"
-    default: "${{ secrets.DOCKERHUB_USERNAME }}"
+    default: ""
     required: false
   private-registry-token:
     description: "The private registry token"
-    default: "${{ secrets.DOCKERHUB_TOKEN }}"
+    default: ""
     required: false
   private-registry-addr:
     description: "The private registry addresss"
     required: false
-    default: "${{ secrets.DOCKERHUB_REGISTRY }}"
+    default: ""
   private-registry-project:
     description: "The private registry project"
     default: "plane"
