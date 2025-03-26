@@ -92,6 +92,7 @@ runs:
       env:
         IMG_OWNER: ${{ inputs.docker-image-owner }}
         IMG_NAME: ${{ inputs.docker-image-name }}
+        DOCKERHUB_PUSH: ${{ inputs.dockerhub-push }}
         PRIVATE_REGISTRY_PUSH: ${{ inputs.private-registry-push }}
         PRIVATE_REGISTRY_ADDR: ${{ inputs.private-registry-addr }}
         PRIVATE_REGISTRY_PROJECT: ${{ inputs.private-registry-project }}
@@ -131,7 +132,8 @@ runs:
         else
           TAG=${{ env.IMG_OWNER }}/${{ env.IMG_NAME }}:${FLAT_BRANCH_VERSION}
           if [ "${{ env.PRIVATE_REGISTRY_PUSH }}" == "true" ]; then
-            TAG=${TAG},${{ env.PRIVATE_REGISTRY_ADDR }}/${{ env.PRIVATE_REGISTRY_PROJECT }}/${{ env.IMG_NAME }}:${FLAT_BRANCH_VERSION}
+            # TAG=${TAG},${{ env.PRIVATE_REGISTRY_ADDR }}/${{ env.PRIVATE_REGISTRY_PROJECT }}/${{ env.IMG_NAME }}:${FLAT_BRANCH_VERSION}
+            TAG=${{ env.PRIVATE_REGISTRY_ADDR }}/${{ env.PRIVATE_REGISTRY_PROJECT }}/${{ env.IMG_NAME }}:${FLAT_BRANCH_VERSION}
           fi
         fi
         
